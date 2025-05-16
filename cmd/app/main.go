@@ -1,9 +1,9 @@
 package main
 
 import (
-	"app/menu"
+	"app/renderer"
 )
 
 func main() {
-	menu.MainMenu()
+	renderer.RenderMarket()
 }
