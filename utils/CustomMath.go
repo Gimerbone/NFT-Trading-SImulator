@@ -1,0 +1,15 @@
+package utils
+
+type integer interface {
+	~int | ~int8 | ~int16 | ~int32 | ~int64 |
+		~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64
+}
+
+func IntDivCeil[intTypes integer](number intTypes, divisor intTypes) intTypes {
+	result := number / divisor
+	if number%divisor != 0 {
+		result++
+	}
+
+	return result
+}
