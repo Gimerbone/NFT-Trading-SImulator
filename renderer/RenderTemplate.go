@@ -5,6 +5,13 @@ import (
 	"fmt"
 )
 
+func RenderQuitMessage() {
+	fmt.Println("====================================================")
+	fmt.Println("        Sagitarius Market - NFT Marketplace")
+	fmt.Println("====================================================")
+	fmt.Println(" Thanks for using our app!")
+}
+
 func RenderMainMenu(option *int8) {
 	fmt.Println("====================================================")
 	fmt.Println("        Sagitarius Market - NFT Marketplace")
@@ -45,28 +52,88 @@ func RenderMarket(data data.TabNFT, pageNumber, entryPerPage, maxPage int16) {
 	fmt.Println("===================================================================================================================")
 }
 
-func RenderMarketMenu(option *int8) {
-	fmt.Printf("\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
-		"01. Next Page",
-		"02. Previous Page",
-		"03. First Page",
-		"04. Last Page",
-		"05. Sort by ID",
-		"06. Sort by Price",
-		"07. Sort by Date",
-		"08. Sort by Royalty",
-		"09. Purchase NFT",
-		"10. Search by ID",
-		"11. Search by NFT Name",
-		"12. Filter by Blockchain Type",
-		"13. Filter by Creator Name",
-		"14. Filter by Release Year",
-		"15. Filter by Owner Name",
-		"0. Back",
-	)
+func RenderMarketMenu1(option *int8) {
+	for {
+		fmt.Printf("\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
+			"1. Next Page",
+			"2. Previous Page",
+			"3. First Page",
+			"4. Last Page",
+			"5. Sort by ID (Ascending)",
+			"6. Sort by ID (Descending)",
+			"7. Sort by Price (Ascending)",
+			"8. Sort by Price (Descending)",
+			"9. Next Option",
+			"0. Back",
+		)
 
-	fmt.Println("Choose Option:")
-	fmt.Scanln(option)
+		fmt.Println("Choose Option:")
+		fmt.Scanln(option)
+
+		if *option > -1 && *option < 10 {
+			break
+		}
+
+		fmt.Printf("%s\n%s\n",
+			"Option does not exist, Choose (0-9).",
+			"--------------------------------------",
+		)
+	}
+}
+
+func RenderMarketMenu2(option *int8) {
+	for {
+		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
+			"1. Sort by Date (Ascending)",
+			"2. Sort by Date (Descending)",
+			"3. Sort by Royalty (Ascending)",
+			"4. Sort by Royalty (Descending)",
+			"5. Purchase NFT",
+			"6. Search by ID",
+			"7. Search by NFT Name",
+			"8. Next Option",
+			"9. Previous Option",
+			"0. Back",
+		)
+
+		fmt.Println("Choose Option:")
+		fmt.Scanln(option)
+
+		if *option > -1 && *option < 10 {
+			break
+		}
+
+		fmt.Printf("%s\n%s\n",
+			"Option does not exist, Choose (0-9).",
+			"--------------------------------------",
+		)
+	}
+}
+
+func RenderMarketMenu3(option *int8) {
+	for {
+		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
+			"1. Filter by Blockchain Type",
+			"2. Filter by Creator Name",
+			"3. Filter by Release Year",
+			"4. Filter by Owner Name",
+			"5. Show only your NFT",
+			"9. Previous Option",
+			"0. Back",
+		)
+
+		fmt.Println("Choose Option:")
+		fmt.Scanln(option)
+
+		if (*option > -1 && *option < 6) || *option == 9 {
+			break
+		}
+
+		fmt.Printf("%s\n%s\n",
+			"Option does not exist, Choose (0-5 or 9).",
+			"--------------------------------------",
+		)
+	}
 }
 
 func renderMarketList(arr data.TabNFT, entryStart int16, entryEnd int16) {
