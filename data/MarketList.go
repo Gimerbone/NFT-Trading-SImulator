@@ -21,6 +21,21 @@ const NMAX = 999
 
 type TabNFT [NMAX]Nft
 
+/*
+This variable tells TabNFT sort status
+- 0: Unsorted.
+- 1: Sorted by ID asc.
+- 2: Sorted by ID dsc.
+- 3: Sorted by Price asc.
+- 4: Sorted by Price dsc.
+- 5: Sorted by Date asc.
+- 6. Sorted by Date dsc.
+- 7. Sorted by Royalty asc.
+- 8. Sorted by Royalty dsc.
+Default is one
+*/
+var StatusCode int8 = 1
+
 var rng = rand.New(rand.NewSource(time.Now().UnixNano()))
 
 var blockchains = [10]string{
@@ -120,21 +135,22 @@ var owners = [40]string{
 	"Adil Q.", "Fatima C.",
 }
 
-func InitiateMarket(nftList *TabNFT) {
-	// Preparing nftList array with 1000 entries
-
+func InitiateMarketList(nftList *TabNFT, nData *int16) {
+	// Preparing nftList array with 999 entries
+	// Should only be called from market handler once
 	var i uint16
 	for i = 0; i < 999; i++ {
 		randomDate := time.Now().AddDate(0, 0, -1*rng.Intn(1000))
-		(*nftList)[i] = Nft{
-			ID:         i + 1,
-			Name:       fmt.Sprintf("%s #%d", nftNames[rng.Intn(len(nftNames))], rng.Intn(9000)+1000),
-			Creator:    creators[rng.Intn(len(creators))],
-			Owner:      owners[rng.Intn(len(owners))],
-			Blockchain: blockchains[rng.Intn(len(blockchains))],
-			PriceETH:   rng.Float64()*10 + 0.1,
-			CreatedAt:  randomDate.Format("02-01-2006"),
-			Royalty:    rng.Float32() * 0.2,
-		}
+
+		(*nftList)[i].ID = i + 1
+		(*nftList)[i].Name = fmt.Sprintf("%s #%d", nftNames[rng.Intn(len(nftNames))], rng.Intn(9000)+1000)
+		(*nftList)[i].Creator = creators[rng.Intn(len(creators))]
+		(*nftList)[i].Owner = owners[rng.Intn(len(owners))]
+		(*nftList)[i].Blockchain = blockchains[rng.Intn(len(blockchains))]
+		(*nftList)[i].PriceETH = rng.Float64()*10 + 0.1
+		(*nftList)[i].CreatedAt = randomDate.Format("02-01-2006")
+		(*nftList)[i].Royalty = rng.Float32() * 0.2
 	}
+
+	*nData = 999
 }
