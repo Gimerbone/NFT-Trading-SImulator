@@ -5,10 +5,10 @@ import (
 )
 
 func findMinID(arr data.TabNFT, nData int16, idxStart int16) int16 {
-	var min int16
+	var min, i int16
 
 	min = 0
-	for i := idxStart; i < nData; i++ {
+	for i = idxStart; i < nData; i++ {
 		if arr[min].ID > arr[i].ID {
 			min = i
 		}
@@ -17,10 +17,10 @@ func findMinID(arr data.TabNFT, nData int16, idxStart int16) int16 {
 }
 
 func findMaxID(arr data.TabNFT, nData int16, idxStart int16) int16 {
-	var max int16
+	var max, i int16
 
 	max = 0
-	for i := idxStart; i < nData; i++ {
+	for i = idxStart; i < nData; i++ {
 		if arr[max].ID < arr[i].ID {
 			max = i
 		}
@@ -89,6 +89,7 @@ func LSearchID(arr data.TabNFT, nData int16, targetID uint16) int16 {
 
 func LSearchName(arr data.TabNFT, nData int16, targetName string) int16 {
 	var i int16 = 0
+	
 	for i < nData && targetName != arr[i].Name {
 		i++
 	}
