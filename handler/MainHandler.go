@@ -10,6 +10,7 @@ func StartApp() {
 	initiateMarket()
 	data.User.BalanceETH = 10.0
 
+	renderer.ClearScreen()
 	handleMain()
 }
 
@@ -18,6 +19,7 @@ func handleMain() {
 		option int8
 	)
 
+	renderer.RenderWelcome()
 	renderer.RenderMainMenu(&option)
 	mainMux(option)
 }
@@ -54,7 +56,4 @@ func handleWelcome() {
 		renderer.ClearScreen()
 		renderer.RenderInvCharLen()
 	}
-
-	renderer.ClearScreen()
-	renderer.RenderWelcome()
 }

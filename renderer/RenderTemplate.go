@@ -23,7 +23,7 @@ func RenderQuitMessage() {
 }
 
 func RenderBalance() {
-	fmt.Printf("%s%f%s\n",
+	fmt.Printf("%s%.2f%s\n",
 		"Balance: ",
 		data.User.BalanceETH, " ETH",
 	)

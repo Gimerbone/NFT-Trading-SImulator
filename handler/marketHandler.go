@@ -22,7 +22,7 @@ func handleMarket(nftList data.TabNFT, nData int16, pageNumber int16, muxNumber 
 	maxPage = utils.IntDivCeil(nData, entryPerPage)
 
 	renderer.RenderBalance()
-	renderer.RenderMarket(nftList, pageNumber, entryPerPage, maxPage, nOriginalData)
+	renderer.RenderMarket(nftList, pageNumber, entryPerPage, maxPage, nData)
 
 	marketMenuMux(muxNumber, nftList, nData, pageNumber, maxPage)
 }
@@ -154,10 +154,11 @@ func handleIDSearch(muxNumber int8) int8 {
 	// 0: Search success
 	// 1. User exit search
 	var (
-		result               data.TabNFT
-		nResult, idx, target int16
+		result      data.TabNFT
+		idx, target int16
 	)
 
+	renderer.ClearScreen()
 	renderer.RenderIdSearch(&target)
 
 	if target == -1 {
@@ -174,9 +175,9 @@ func handleIDSearch(muxNumber int8) int8 {
 
 		if idx != -1 {
 			result[0] = originalList[idx]
-			nResult = 1
 
-			handleMarket(result, nResult, 1, muxNumber)
+			renderer.ClearScreen()
+			handleMarket(result, 1, 1, muxNumber)
 		} else {
 			renderer.RenderNotFound("ID")
 			return 1
@@ -191,11 +192,12 @@ func handleNameSearch(muxNumber int8) int8 {
 	// 0: Search success
 	// 1. User exit search
 	var (
-		result       data.TabNFT
-		nResult, idx int16
-		target       string
+		result data.TabNFT
+		idx    int16
+		target string
 	)
 
+	renderer.ClearScreen()
 	renderer.RenderNameSearch(&target)
 	if target == "-1" {
 		return 1
@@ -203,9 +205,9 @@ func handleNameSearch(muxNumber int8) int8 {
 		idx = utils.LSearchName(originalList, nOriginalData, target)
 		if idx != -1 {
 			result[0] = originalList[idx]
-			nResult = 1
 
-			handleMarket(result, nResult, 1, muxNumber)
+			renderer.ClearScreen()
+			handleMarket(result, 1, 1, muxNumber)
 		} else {
 			renderer.RenderNotFound("Name")
 			return 1
