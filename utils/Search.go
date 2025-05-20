@@ -7,7 +7,7 @@ import (
 func findMinID(arr data.TabNFT, nData int16, idxStart int16) int16 {
 	var min, i int16
 
-	min = 0
+	min = idxStart
 	for i = idxStart; i < nData; i++ {
 		if arr[min].ID > arr[i].ID {
 			min = i
@@ -19,7 +19,7 @@ func findMinID(arr data.TabNFT, nData int16, idxStart int16) int16 {
 func findMaxID(arr data.TabNFT, nData int16, idxStart int16) int16 {
 	var max, i int16
 
-	max = 0
+	max = idxStart
 	for i = idxStart; i < nData; i++ {
 		if arr[max].ID < arr[i].ID {
 			max = i

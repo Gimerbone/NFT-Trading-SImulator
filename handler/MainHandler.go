@@ -1,0 +1,60 @@
+package handler
+
+import (
+	"app/data"
+	"app/renderer"
+)
+
+func StartApp() {
+	handleWelcome()
+	initiateMarket()
+	data.User.BalanceETH = 10.0
+
+	handleMain()
+}
+
+func handleMain() {
+	var (
+		option int8
+	)
+
+	renderer.RenderMainMenu(&option)
+	mainMux(option)
+}
+
+func mainMux(option int8) {
+	switch option {
+	case 0:
+		renderer.ClearScreen()
+		renderer.RenderQuitMessage()
+	case 1:
+		renderer.ClearScreen()
+		handleMarket(originalList, nOriginalData, 1, 1)
+	case 2:
+		portfolioHandler()
+	default:
+		renderer.ClearScreen()
+		renderer.RenderOptionNotExist()
+		handleMain()
+	}
+}
+
+func handleWelcome() {
+	var (
+		username string
+	)
+
+	renderer.ClearScreen()
+	for {
+		renderer.RenderUsernameInput(&username)
+		if len(username) <= 10 && username != "" {
+			data.User.Name = username
+			break
+		}
+		renderer.ClearScreen()
+		renderer.RenderInvCharLen()
+	}
+
+	renderer.ClearScreen()
+	renderer.RenderWelcome()
+}

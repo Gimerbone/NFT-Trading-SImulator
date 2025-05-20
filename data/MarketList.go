@@ -17,7 +17,7 @@ type Nft struct {
 	Royalty    float32
 }
 
-const NMAX = 999
+const NMAX = 1024
 
 type TabNFT [NMAX]Nft
 
@@ -139,7 +139,7 @@ func InitiateMarketList(nftList *TabNFT, nData *int16) {
 	// Preparing nftList array with 999 entries
 	// Should only be called from market handler once
 	var i uint16
-	for i = 0; i < 999; i++ {
+	for i = 0; i < NMAX; i++ {
 		randomDate := time.Now().AddDate(0, 0, -1*rng.Intn(1000))
 
 		(*nftList)[i].ID = i + 1
@@ -149,8 +149,8 @@ func InitiateMarketList(nftList *TabNFT, nData *int16) {
 		(*nftList)[i].Blockchain = blockchains[rng.Intn(len(blockchains))]
 		(*nftList)[i].PriceETH = rng.Float64()*10 + 0.1
 		(*nftList)[i].CreatedAt = randomDate.Format("02-01-2006")
-		(*nftList)[i].Royalty = rng.Float32() * 0.2
+		(*nftList)[i].Royalty = rng.Float32() * 0.15
 	}
 
-	*nData = 999
+	*nData = NMAX
 }
