@@ -1,5 +1,5 @@
 # NFT Trading Simulator
-Created by Muhammad Hafizh adn Rashaqa Nashwan Moya
+Created by Muhammad Hafizh and Rashaqa Nashwan Moya
 ___
 This app is a simple nft trading simulation game, your goal is to get as much money as possible from trading.
 
