@@ -1,11 +1,5 @@
 package data
 
-import (
-	"fmt"
-	"math/rand"
-	"time"
-)
-
 type Nft struct {
 	ID         uint16
 	Name       string
@@ -36,9 +30,7 @@ Default is one
 */
 var StatusCode int8 = 1
 
-var rng = rand.New(rand.NewSource(time.Now().UnixNano()))
-
-var blockchains = [10]string{
+var Blockchains = [10]string{
 	"Ethereum", "Polygon",
 	"Solana", "BSC",
 	"Avalanche", "Fantom",
@@ -46,7 +38,7 @@ var blockchains = [10]string{
 	"Arbitrum", "Optimism",
 }
 
-var nftNames = [100]string{
+var NftNames = [100]string{
 	"Meta Relic", "Ethereal Bloom",
 	"Void Runner", "Pixel Propher",
 	"Celestial Spark", "Chain Phantom",
@@ -99,7 +91,7 @@ var nftNames = [100]string{
 	"Neon Whisper", "Echo Tether",
 }
 
-var creators = [20]string{
+var Creators = [20]string{
 	"LarvaLabs", "YugaLabs",
 	"ArtBlocks", "OpenSea",
 	"Manifold", "Zora",
@@ -112,7 +104,7 @@ var creators = [20]string{
 	"SuperRare", "NiftyGate",
 }
 
-var owners = [40]string{
+var Owners = [40]string{
 	"William H.", "Emily B.",
 	"Charles D.", "Grace L.",
 	"Henry M.", "Alice T.",
@@ -133,24 +125,4 @@ var owners = [40]string{
 	"Bilal J.", "Nadia Z.",
 	"Hassan O.", "Amira E.",
 	"Adil Q.", "Fatima C.",
-}
-
-func InitiateMarketList(nftList *TabNFT, nData *int16) {
-	// Preparing nftList array with 999 entries
-	// Should only be called from market handler once
-	var i uint16
-	for i = 0; i < NMAX; i++ {
-		randomDate := time.Now().AddDate(0, 0, -1*rng.Intn(1000))
-
-		(*nftList)[i].ID = i + 1
-		(*nftList)[i].Name = fmt.Sprintf("%s #%d", nftNames[rng.Intn(len(nftNames))], rng.Intn(9000)+1000)
-		(*nftList)[i].Creator = creators[rng.Intn(len(creators))]
-		(*nftList)[i].Owner = owners[rng.Intn(len(owners))]
-		(*nftList)[i].Blockchain = blockchains[rng.Intn(len(blockchains))]
-		(*nftList)[i].PriceETH = rng.Float64()*10 + 0.1
-		(*nftList)[i].CreatedAt = randomDate.Format("02-01-2006")
-		(*nftList)[i].Royalty = rng.Float32() * 0.15
-	}
-
-	*nData = NMAX
 }

@@ -6,13 +6,6 @@ import (
 	"app/utils"
 )
 
-var originalList data.TabNFT
-var nOriginalData int16
-
-func initiateMarket() {
-	data.InitiateMarketList(&originalList, &nOriginalData)
-}
-
 func handleMarket(nftList data.TabNFT, nData int16, pageNumber int16, muxNumber int8) {
 	var (
 		maxPage, entryPerPage int16

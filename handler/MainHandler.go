@@ -7,7 +7,7 @@ import (
 
 func StartApp() {
 	handleWelcome()
-	initiateMarket()
+	initiateMarketList()
 	data.User.BalanceETH = 10.0
 
 	renderer.ClearScreen()
