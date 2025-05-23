@@ -33,11 +33,11 @@ func RenderBalance() {
 func RenderUsernameInput(username *string) {
 	renderLogo()
 	fmt.Print("Enter your username (1-10 characters): ")
-	fmt.Scanln(username)
+	utils.ScanSentence(username)
 }
 
-func RenderInvCharLen() {
-	fmt.Println("Invalid character length.")
+func RenderInvalidName() {
+	fmt.Println("That name is not permitted.")
 }
 
 func RenderWelcome() {

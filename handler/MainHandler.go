@@ -31,7 +31,7 @@ func mainMux(option int8) {
 		renderer.RenderQuitMessage()
 	case 1:
 		renderer.ClearScreen()
-		handleMarket(originalList, nOriginalData, 1, 1)
+		handleMarket(OriginalList, NOriginalData, 1, 1)
 	case 2:
 		portfolioHandler()
 	default:
@@ -49,11 +49,11 @@ func handleWelcome() {
 	renderer.ClearScreen()
 	for {
 		renderer.RenderUsernameInput(&username)
-		if len(username) <= 10 && username != "" {
+		if len(username) < 11 && username != "" {
 			data.User.Name = username
 			break
 		}
 		renderer.ClearScreen()
-		renderer.RenderInvCharLen()
+		renderer.RenderInvalidName()
 	}
 }

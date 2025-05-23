@@ -7,11 +7,13 @@ func ScanSentence(str *string) {
 
 	var temp string
 
-	fmt.Scan(&temp)
+	fmt.Scanf("%s\n", &temp)
 	*str = temp
 
 	for temp[len(temp)-1] != '.' {
 		fmt.Scan(&temp)
-		*str = *str + " " + temp
+		if temp != " " {
+			*str = *str + " " + temp
+		}
 	}
 }

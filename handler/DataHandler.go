@@ -9,8 +9,8 @@ import (
 	"time"
 )
 
-var originalList data.TabNFT
-var nOriginalData int16
+var OriginalList data.TabNFT
+var NOriginalData int16
 
 var rng = rand.New(rand.NewSource(time.Now().UnixNano()))
 
@@ -24,17 +24,17 @@ func initiateMarketList() {
 
 	for i = 0; i < data.NMAX; i++ {
 		randomDate := time.Now().AddDate(0, 0, -1*rng.Intn(1000))
-		originalList[i].ID = i + 1
-		originalList[i].Name = uniqueNameGenerator(&nameList)
-		originalList[i].Creator = data.Creators[rng.Intn(len(data.Creators))]
-		originalList[i].Owner = data.Owners[rng.Intn(len(data.Owners))]
-		originalList[i].Blockchain = data.Blockchains[rng.Intn(len(data.Blockchains))]
-		originalList[i].PriceETH = utils.TruncateFloat(rng.Float64()*10 + 0.1)
-		originalList[i].CreatedAt = randomDate.Format("02-01-2006")
-		originalList[i].Royalty = utils.TruncateFloat(rng.Float32() * 0.15)
+		OriginalList[i].ID = i + 1
+		OriginalList[i].Name = uniqueNameGenerator(&nameList)
+		OriginalList[i].Creator = data.Creators[rng.Intn(len(data.Creators))]
+		OriginalList[i].Owner = data.Owners[rng.Intn(len(data.Owners))]
+		OriginalList[i].Blockchain = data.Blockchains[rng.Intn(len(data.Blockchains))]
+		OriginalList[i].PriceETH = utils.TruncateFloat(rng.Float64()*10 + 0.1)
+		OriginalList[i].CreatedAt = randomDate.Format("02-01-2006")
+		OriginalList[i].Royalty = utils.TruncateFloat(rng.Float32() * 0.15)
 	}
 
-	nOriginalData = data.NMAX
+	NOriginalData = data.NMAX
 }
 
 func uniqueNameGenerator(nameList *hmap.HashMap) string {

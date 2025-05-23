@@ -118,7 +118,7 @@ func marketOptionMux2(option int8, nftList *data.TabNFT, nData int16, currentPag
 		renderer.ClearScreen()
 		handleMarket(*nftList, nData, currentPage, 2)
 	case 6:
-		code := handleIDSearch(2)
+		code := HandleIDSearch(2)
 		if code == 1 {
 			renderer.ClearScreen()
 			handleMarket(*nftList, nData, currentPage, 2)
@@ -142,7 +142,7 @@ func marketOptionMux2(option int8, nftList *data.TabNFT, nData int16, currentPag
 	}
 }
 
-func handleIDSearch(muxNumber int8) int8 {
+func HandleIDSearch(muxNumber int8) int8 {
 	// Returns status code
 	// 0: Search success
 	// 1. User exit search
@@ -159,15 +159,15 @@ func handleIDSearch(muxNumber int8) int8 {
 	} else {
 		switch data.StatusCode {
 		case 1:
-			idx = utils.BSearchAscID(originalList, nOriginalData, uint16(target))
+			idx = utils.BSearchAscID(OriginalList, NOriginalData, uint16(target))
 		case 2:
-			idx = utils.BSearchDscID(originalList, nOriginalData, uint16(target))
+			idx = utils.BSearchDscID(OriginalList, NOriginalData, uint16(target))
 		default:
-			idx = utils.LSearchID(originalList, nOriginalData, uint16(target))
+			idx = utils.LSearchID(OriginalList, NOriginalData, uint16(target))
 		}
 
 		if idx != -1 {
-			result[0] = originalList[idx]
+			result[0] = OriginalList[idx]
 
 			renderer.ClearScreen()
 			handleMarket(result, 1, 1, muxNumber)
@@ -195,9 +195,9 @@ func handleNameSearch(muxNumber int8) int8 {
 	if target == "-1" {
 		return 1
 	} else {
-		idx = utils.LSearchName(originalList, nOriginalData, target)
+		idx = utils.LSearchName(OriginalList, NOriginalData, target)
 		if idx != -1 {
-			result[0] = originalList[idx]
+			result[0] = OriginalList[idx]
 
 			renderer.ClearScreen()
 			handleMarket(result, 1, 1, muxNumber)
