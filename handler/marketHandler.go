@@ -159,9 +159,9 @@ func handleIDSearch(muxNumber int8) int8 {
 	} else {
 		switch data.StatusCode {
 		case 1:
-			idx = target - 1
+			idx = utils.BSearchAscID(originalList, nOriginalData, uint16(target))
 		case 2:
-			idx = data.NMAX - target
+			idx = utils.BSearchDscID(originalList, nOriginalData, uint16(target))
 		default:
 			idx = utils.LSearchID(originalList, nOriginalData, uint16(target))
 		}

@@ -4,7 +4,9 @@ package hmap
 // The key and value are like this map[key: string] -> bool.
 // It's optimized for [1, 12] char length string, returns true if found.
 
-type HashMap [1024]string
+const TABLE_SIZE uint32 = 1024
+
+type HashMap [TABLE_SIZE]string
 
 func hash(key string) uint32 {
 	var (
@@ -21,11 +23,20 @@ func hash(key string) uint32 {
 }
 
 func IsKeyPresent(hmap HashMap, key string) bool {
-	if hmap[hash(key)] == "" {
-		return false
-	} else {
-		return true
+	var i, idx, first_position uint32
+
+	first_position = hash(key)
+	for i = 0; i < TABLE_SIZE; i++ {
+		idx = (first_position + i) & 1023
+		if hmap[idx] == "" {
+			return false
+		}
+		if hmap[idx] == key {
+			return true
+		}
 	}
+
+	return false
 }
 
 func AddKey(hmap *HashMap, key string) {

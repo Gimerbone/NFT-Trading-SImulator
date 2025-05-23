@@ -2,6 +2,7 @@ package utils
 
 import (
 	"app/data"
+	"time"
 )
 
 func SortIDAsc(arr *data.TabNFT, n int16) {
@@ -82,16 +83,23 @@ func SortPriceDsc(arr *data.TabNFT, n int16) {
 
 func SortDateAsc(arr *data.TabNFT, n int16) {
 	var (
-		i, j int16
-		key  data.Nft
+		i, j               int16
+		key                data.Nft
+		layout             string
+		timeKey, timeIndex time.Time
 	)
 
+	layout = "02-01-2006"
 	for i = 1; i < n; i++ {
 		key = (*arr)[i]
 		j = i - 1
 
-		for j > -1 && key.CreatedAt < (*arr)[j].CreatedAt {
+		timeKey, _ = time.Parse(layout, key.CreatedAt)
+		timeIndex, _ = time.Parse(layout, (*arr)[j].CreatedAt)
+
+		for j > -1 && timeKey.Before(timeIndex) {
 			(*arr)[j+1] = (*arr)[j]
+			timeIndex, _ = time.Parse(layout, (*arr)[j].CreatedAt)
 			j--
 		}
 
@@ -101,16 +109,23 @@ func SortDateAsc(arr *data.TabNFT, n int16) {
 
 func SortDateDsc(arr *data.TabNFT, n int16) {
 	var (
-		i, j int16
-		key  data.Nft
+		i, j               int16
+		key                data.Nft
+		layout             string
+		timeKey, timeIndex time.Time
 	)
 
+	layout = "02-01-2006"
 	for i = 1; i < n; i++ {
 		key = (*arr)[i]
 		j = i - 1
 
-		for j > -1 && key.CreatedAt > (*arr)[j].CreatedAt {
+		timeKey, _ = time.Parse(layout, key.CreatedAt)
+		timeIndex, _ = time.Parse(layout, (*arr)[j].CreatedAt)
+
+		for j > -1 && timeKey.After(timeIndex) {
 			(*arr)[j+1] = (*arr)[j]
+			timeIndex, _ = time.Parse(layout, (*arr)[j].CreatedAt)
 			j--
 		}
 

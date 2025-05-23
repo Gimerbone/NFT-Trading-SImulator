@@ -3,6 +3,7 @@ package handler
 import (
 	"app/data"
 	"app/hmap"
+	"app/utils"
 	"fmt"
 	"math/rand"
 	"time"
@@ -28,9 +29,9 @@ func initiateMarketList() {
 		originalList[i].Creator = data.Creators[rng.Intn(len(data.Creators))]
 		originalList[i].Owner = data.Owners[rng.Intn(len(data.Owners))]
 		originalList[i].Blockchain = data.Blockchains[rng.Intn(len(data.Blockchains))]
-		originalList[i].PriceETH = rng.Float64()*10 + 0.1
+		originalList[i].PriceETH = utils.TruncateFloat(rng.Float64()*10 + 0.1)
 		originalList[i].CreatedAt = randomDate.Format("02-01-2006")
-		originalList[i].Royalty = rng.Float32() * 0.15
+		originalList[i].Royalty = utils.TruncateFloat(rng.Float32() * 0.15)
 	}
 
 	nOriginalData = data.NMAX

@@ -4,30 +4,6 @@ import (
 	"app/data"
 )
 
-func findMinID(arr data.TabNFT, nData int16, idxStart int16) int16 {
-	var min, i int16
-
-	min = idxStart
-	for i = idxStart; i < nData; i++ {
-		if arr[min].ID > arr[i].ID {
-			min = i
-		}
-	}
-	return min
-}
-
-func findMaxID(arr data.TabNFT, nData int16, idxStart int16) int16 {
-	var max, i int16
-
-	max = idxStart
-	for i = idxStart; i < nData; i++ {
-		if arr[max].ID < arr[i].ID {
-			max = i
-		}
-	}
-	return max
-}
-
 func BSearchAscID(arr data.TabNFT, nData int16, targetID uint16) int16 {
 	var (
 		low, high, mid, idx int16

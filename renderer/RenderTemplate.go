@@ -2,6 +2,7 @@ package renderer
 
 import (
 	"app/data"
+	"app/utils"
 	"fmt"
 )
 
@@ -151,8 +152,8 @@ func RenderIdSearch(resultId *int16) {
 }
 
 func RenderNameSearch(resultName *string) {
-	fmt.Printf("Enter nft name or -1 to exit:")
-	fmt.Println(resultName)
+	fmt.Printf("Enter nft name (you must end it with '.') or -1 to exit:")
+	utils.ScanSentence(resultName)
 }
 
 func RenderNotFound(notFoundTarget string) {
