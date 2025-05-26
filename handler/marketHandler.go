@@ -216,12 +216,12 @@ func marketOptionMux3(option int8, nftList *data.TabNFT, nData int16, currentPag
 		if code == -1 {
 			renderer.ClearScreen()
 			renderer.RenderOperationFailed()
-			handleMarket(*nftList, nData, currentPage, 3)
 		}
+		handleMarket(*nftList, nData, currentPage, 3)
 	case 2:
 		handleBlockchainFilter()
 	case 3:
-		
+
 	case 9:
 		renderer.ClearScreen()
 		handleMarket(*nftList, nData, currentPage, 2)
@@ -234,6 +234,7 @@ func marketOptionMux3(option int8, nftList *data.TabNFT, nData int16, currentPag
 
 func handlePurchase() int8 {
 	var id int16
+	renderer.ClearScreen()
 	renderer.RenderIdSearch(&id)
 	if id != -1 {
 		return purchaseNFT(id)
