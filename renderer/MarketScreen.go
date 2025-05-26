@@ -6,52 +6,11 @@ import (
 	"fmt"
 )
 
-func renderLogo() {
-	fmt.Println("==============================================================")
-	fmt.Println("             Sagitarius Market - NFT Marketplace")
-	fmt.Println("  GitHub: https://github.com/Gimerbone/NFT-Trading-SImulator")
-	fmt.Println("==============================================================")
-}
-
-func RenderOptionNotExist() {
-	fmt.Println("Option does not exist.")
-}
-
-func RenderQuitMessage() {
-	renderLogo()
-	fmt.Println("Thanks for using our app!")
-	fmt.Println()
-}
-
 func RenderBalance() {
 	fmt.Printf("%s%.2f%s\n",
 		"Balance: ",
 		data.User.BalanceETH, " ETH",
 	)
-}
-
-func RenderUsernameInput(username *string) {
-	renderLogo()
-	fmt.Print("Enter your username (1-10 characters): ")
-	utils.ScanSentence(username)
-}
-
-func RenderInvalidName() {
-	fmt.Println("That name is not permitted.")
-}
-
-func RenderWelcome() {
-	fmt.Printf("Welcome, %s!\n", data.User.Name)
-}
-
-func RenderMainMenu(option *int8) {
-	renderLogo()
-	fmt.Println("1. Browse Market")
-	fmt.Println("2. View Your portfolio")
-	fmt.Println("0. Exit App")
-
-	fmt.Print("Choose Option: ")
-	fmt.Scanf("%d\n", option)
 }
 
 func RenderMarket(data data.TabNFT, pageNumber, entryPerPage, maxPage, nData int16) {
@@ -66,6 +25,20 @@ func RenderMarket(data data.TabNFT, pageNumber, entryPerPage, maxPage, nData int
 	fmt.Println("===================================================================================================================")
 	fmt.Printf("  PAGES %d/%d\n", pageNumber, maxPage)
 	fmt.Println("===================================================================================================================")
+}
+
+func renderMarketList(arr data.TabNFT, entryStart, entryEnd, nData int16) {
+	if entryEnd > nData {
+		entryEnd = nData
+	}
+
+	for i := entryStart; i < entryEnd; i++ {
+		fmt.Printf(" | %4d | %-24s | %-12s | %-12s | %-10s | %9.2f | %10s | %5.0f %% |\n",
+			arr[i].ID, arr[i].Name, arr[i].Creator, arr[i].Owner,
+			arr[i].Blockchain, arr[i].PriceETH, arr[i].CreatedAt,
+			arr[i].Royalty*100,
+		)
+	}
 }
 
 func RenderMarketMenu1(option *int8) {
@@ -120,20 +93,6 @@ func RenderMarketMenu3(option *int8) {
 	fmt.Scanf("%d\n", option)
 }
 
-func renderMarketList(arr data.TabNFT, entryStart, entryEnd, nData int16) {
-	if entryEnd > nData {
-		entryEnd = nData
-	}
-
-	for i := entryStart; i < entryEnd; i++ {
-		fmt.Printf(" | %4d | %-24s | %-12s | %-12s | %-10s | %9.2f | %10s | %5.0f %% |\n",
-			arr[i].ID, arr[i].Name, arr[i].Creator, arr[i].Owner,
-			arr[i].Blockchain, arr[i].PriceETH, arr[i].CreatedAt,
-			arr[i].Royalty*100,
-		)
-	}
-}
-
 func RenderIdSearch(resultId *int16) {
 	for {
 		fmt.Printf("Enter nft id or -1 to exit:")
@@ -156,6 +115,7 @@ func RenderNameSearch(resultName *string) {
 	utils.ScanSentence(resultName)
 }
 
-func RenderNotFound(notFoundTarget string) {
-	fmt.Printf("%s not found.\n--------------------------\n", notFoundTarget)
+func RenderBlockchainInput(blockchain *string) {
+	fmt.Println("Enter blockchain name or -1 to exit:")
+	fmt.Scan(&blockchain)
 }

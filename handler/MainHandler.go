@@ -31,9 +31,7 @@ func mainMux(option int8) {
 		renderer.RenderQuitMessage()
 	case 1:
 		renderer.ClearScreen()
-		handleMarket(OriginalList, NOriginalData, 1, 1)
-	case 2:
-		portfolioHandler()
+		handleMarket(originalList, nOriginalData, 1, 1)
 	default:
 		renderer.ClearScreen()
 		renderer.RenderOptionNotExist()

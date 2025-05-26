@@ -2,45 +2,41 @@ package handler
 
 import (
 	"app/data"
-	"app/handler"
 	"app/utils"
 )
 
 var boughtNFTlist [data.NMAX]data.Nft
 var nData int
 
-func buyNFT(boughtID int) {
+func purchaseNFT(boughtID int16) int8 {
+	// Returns 0 if success, -1 if boughtID not found
+
 	var (
-		idx int
+		idx int16
 	)
 
-	switch data.StatusCode {
-	case 1:
-		idx = utils.BSearchAscID(handler.OriginalList, handler.NOriginalData, uint16(target))
-	case 2:
-		idx = utils.BSearchDscID(handler.OriginalList,  handler.NOriginalData, uint16(target))
-	default:
-		idx = utils.LSearchID(handler.OriginalList,  handler.NOriginalData, uint16(target))
+	idx = utils.SearchMarketID(originalList, nOriginalData, uint16(boughtID))
+
+	if idx == -1 {
+		return -1
+	} else {
+		boughtNFTlist[nData] = originalList[idx]
+		nData++
+
+		delNFT(idx)
+
+		return 0
 	}
-
-	boughtNFTlist[nData] = handler.OriginalList[idx]
-	nData++
-
-	delNFT(idx)
 }
 
-func delNFT(delIndex int){
+func delNFT(delIndex int16) {
 	var (
-		i int
+		i int16
 	)
 
-	for i = delIndex;i < handler.NOriginalData-1; i++ {
-		handler.OriginalList[i] = handler.OriginalList[i+1]
+	for i = delIndex; i < nOriginalData-1; i++ {
+		originalList[i] = originalList[i+1]
 	}
 
-	handler.NOriginalData--
-}
-
-func portfolioHandler() {
-
+	nOriginalData--
 }
