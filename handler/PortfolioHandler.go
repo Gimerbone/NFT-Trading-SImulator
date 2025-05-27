@@ -2,41 +2,20 @@ package handler
 
 import (
 	"app/data"
+	"app/renderer"
 	"app/utils"
 )
 
-var boughtNFTlist [data.NMAX]data.Nft
-var nData int
-
-func purchaseNFT(boughtID int16) int8 {
-	// Returns 0 if success, -1 if boughtID not found
-
+func handlePortfolio(nftList data.TabNFT, nData int16, pageNumber int16, muxNumber int8) {
 	var (
-		idx int16
+		maxPage, entryPerPage int16
 	)
 
-	idx = utils.SearchMarketID(originalList, nOriginalData, uint16(boughtID))
+	entryPerPage = 15
+	maxPage = utils.IntDivCeil(nData, entryPerPage)
 
-	if idx == -1 {
-		return -1
-	} else {
-		boughtNFTlist[nData] = originalList[idx]
-		nData++
+	renderer.RenderBalance()
+	renderer.RenderMarket(nftList, pageNumber, entryPerPage, maxPage, nData)
 
-		delNFT(idx)
-
-		return 0
-	}
-}
-
-func delNFT(delIndex int16) {
-	var (
-		i int16
-	)
-
-	for i = delIndex; i < nOriginalData-1; i++ {
-		originalList[i] = originalList[i+1]
-	}
-
-	nOriginalData--
+	marketMenuMux(muxNumber, nftList, nData, pageNumber, maxPage)
 }

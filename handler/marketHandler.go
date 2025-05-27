@@ -145,83 +145,33 @@ func marketOptionMux2(option int8, nftList *data.TabNFT, nData int16, currentPag
 	}
 }
 
-func HandleIDSearch(muxNumber int8) int8 {
-	// Returns status code
-	// 0: Search success
-	// 1. User exit search
-	var (
-		result      data.TabNFT
-		idx, target int16
-	)
-
-	renderer.ClearScreen()
-	renderer.RenderIdSearch(&target)
-
-	if target == -1 {
-		return 1
-	} else {
-		idx = utils.SearchMarketID(originalList, nOriginalData, uint16(target))
-
-		if idx != -1 {
-			result[0] = originalList[idx]
-
-			renderer.ClearScreen()
-			handleMarket(result, 1, 1, muxNumber)
-		} else {
-			renderer.RenderNotFound("ID")
-			return 1
-		}
-
-		return 0
-	}
-}
-
-func handleNameSearch(muxNumber int8) int8 {
-	// Returns status code
-	// 0: Search success
-	// 1. User exit search
-	var (
-		result data.TabNFT
-		idx    int16
-		target string
-	)
-
-	renderer.ClearScreen()
-	renderer.RenderNameSearch(&target)
-	if target == "-1" {
-		return 1
-	} else {
-		idx = utils.LSearchName(originalList, nOriginalData, target)
-		if idx != -1 {
-			result[0] = originalList[idx]
-
-			renderer.ClearScreen()
-			handleMarket(result, 1, 1, muxNumber)
-		} else {
-			renderer.RenderNotFound("Name")
-			return 1
-		}
-
-		return 0
-	}
-}
-
 func marketOptionMux3(option int8, nftList *data.TabNFT, nData int16, currentPage int16, maxPage int16) {
 	switch option {
 	case 0:
 		renderer.ClearScreen()
 		handleMain()
 	case 1:
-		code := handlePurchase()
-		if code == -1 {
-			renderer.ClearScreen()
-			renderer.RenderOperationFailed()
+		var code int8
+		code = handlePurchase()
+		renderer.ClearScreen()
+		if code == 1 {
+			renderer.RenderNotEnoughBalance()
 		}
-		handleMarket(*nftList, nData, currentPage, 3)
+		handleMarket(originalList, nOriginalData, currentPage, 3)
 	case 2:
-		handleBlockchainFilter()
+		var code int8
+		code = handleFilterBlockchain()
+		if code == 1 {
+			renderer.ClearScreen()
+			handleMarket(*nftList, nData, currentPage, 3)
+		}
 	case 3:
-
+		var code int8
+		code = handleFilterCreator()
+		if code == 1 {
+			renderer.ClearScreen()
+			handleMarket(*nftList, nData, currentPage, 3)
+		}
 	case 9:
 		renderer.ClearScreen()
 		handleMarket(*nftList, nData, currentPage, 2)
@@ -230,25 +180,4 @@ func marketOptionMux3(option int8, nftList *data.TabNFT, nData int16, currentPag
 		renderer.RenderOptionNotExist()
 		handleMarket(*nftList, nData, currentPage, 3)
 	}
-}
-
-func handlePurchase() int8 {
-	var id int16
-	renderer.ClearScreen()
-	renderer.RenderIdSearch(&id)
-	if id != -1 {
-		return purchaseNFT(id)
-	}
-	return -1
-}
-
-func handleBlockchainFilter() {
-	var (
-		blockchain    string
-		filteredList  data.TabNFT
-		nFilteredData int16
-	)
-	renderer.RenderBlockchainInput(&blockchain)
-	utils.FilterByBlockchain(blockchain, originalList, nOriginalData, &filteredList, &nFilteredData)
-	handleMarket(filteredList, nFilteredData, 1, 3)
 }

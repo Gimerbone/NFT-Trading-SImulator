@@ -6,7 +6,7 @@ type Nft struct {
 	Creator    string
 	Owner      string
 	Blockchain string
-	PriceETH   float64
+	PriceETH   float32
 	CreatedAt  string
 	Royalty    float32
 }

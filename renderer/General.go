@@ -2,7 +2,6 @@ package renderer
 
 import (
 	"app/data"
-	"app/utils"
 	"fmt"
 )
 
@@ -10,11 +9,18 @@ func ClearScreen() {
 	fmt.Print("\033[H\033[2J")
 }
 
-func renderLogo() {
+func RenderLogo() {
 	fmt.Println("==============================================================")
 	fmt.Println("             Sagitarius Market - NFT Marketplace")
 	fmt.Println("  GitHub: https://github.com/Gimerbone/NFT-Trading-SImulator")
 	fmt.Println("==============================================================")
+}
+
+func RenderBalance() {
+	fmt.Printf("%s%.2f%s\n",
+		"Balance: ",
+		data.User.BalanceETH, " ETH",
+	)
 }
 
 func RenderOptionNotExist() {
@@ -22,15 +28,9 @@ func RenderOptionNotExist() {
 }
 
 func RenderQuitMessage() {
-	renderLogo()
+	RenderLogo()
 	fmt.Println("Thanks for using our app!")
 	fmt.Println()
-}
-
-func RenderUsernameInput(username *string) {
-	renderLogo()
-	fmt.Print("Enter your username (1-10 characters): ")
-	utils.ScanSentence(username)
 }
 
 func RenderInvalidName() {
@@ -47,4 +47,8 @@ func RenderNotFound(notFoundTarget string) {
 
 func RenderOperationFailed() {
 	fmt.Println("Operation failed.")
+}
+
+func RenderNotEnoughBalance() {
+	fmt.Println("Balance not enough.")
 }
