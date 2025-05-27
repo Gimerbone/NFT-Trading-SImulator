@@ -47,7 +47,7 @@ func handleWelcome() {
 	renderer.ClearScreen()
 	renderer.RenderLogo()
 	for {
-		renderer.RenderNameInput("username", &username, false)
+		renderer.RenderNameInput("username (length: 10)", &username, false)
 		if len(username) < 11 && username != "" {
 			data.User.Name = username
 			break

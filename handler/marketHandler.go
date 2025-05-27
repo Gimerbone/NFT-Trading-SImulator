@@ -172,6 +172,27 @@ func marketOptionMux3(option int8, nftList *data.TabNFT, nData int16, currentPag
 			renderer.ClearScreen()
 			handleMarket(*nftList, nData, currentPage, 3)
 		}
+	case 4:
+		var code int8
+		code = handleFilterYear()
+		if code == 1 {
+			renderer.ClearScreen()
+			handleMarket(*nftList, nData, currentPage, 3)
+		}
+	case 5:
+		var code int8
+		code = handleFilterOwner(false)
+		if code == 1 {
+			renderer.ClearScreen()
+			handleMarket(*nftList, nData, currentPage, 3)
+		}
+	case 6:
+		var code int8
+		code = handleFilterOwner(true)
+		if code == 1 {
+			renderer.ClearScreen()
+			handleMarket(*nftList, nData, currentPage, 3)
+		}
 	case 9:
 		renderer.ClearScreen()
 		handleMarket(*nftList, nData, currentPage, 2)

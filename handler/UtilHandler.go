@@ -108,3 +108,39 @@ func handleFilterCreator() int8 {
 	handleMarket(filteredList, nFilteredData, 1, 3)
 	return 0
 }
+
+func handleFilterYear() int8 {
+	var (
+		year          string
+		filteredList  data.TabNFT
+		nFilteredData int16
+	)
+	renderer.ClearScreen()
+	renderer.RenderNameInput("year name", &year, true)
+	if year == "-1" {
+		return 1
+	}
+	utils.FilterByYear(year, originalList, nOriginalData, &filteredList, &nFilteredData)
+	handleMarket(filteredList, nFilteredData, 1, 3)
+	return 0
+}
+
+func handleFilterOwner(isPlayer bool) int8 {
+	var (
+		owner         string
+		filteredList  data.TabNFT
+		nFilteredData int16
+	)
+	renderer.ClearScreen()
+	if !isPlayer {
+		renderer.RenderNameInput("owner name", &owner, true)
+		if owner == "-1" {
+			return 1
+		}
+	} else {
+		owner = data.User.Name
+	}
+	utils.FilterByOwner(owner, originalList, nOriginalData, &filteredList, &nFilteredData)
+	handleMarket(filteredList, nFilteredData, 1, 3)
+	return 0
+}
