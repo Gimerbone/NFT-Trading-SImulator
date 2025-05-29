@@ -40,8 +40,10 @@ func marketOptionMux1(option int8, nftList *data.TabNFT, nData int16, currentPag
 	switch option {
 	case 0:
 		renderer.ClearScreen()
+		data.StatusCode = 1
 		handleMain()
 	case 1:
+		data.StatusCode = 1
 		refreshMarket()
 	case 2:
 		if currentPage == maxPage {
@@ -94,6 +96,7 @@ func marketOptionMux2(option int8, nftList *data.TabNFT, nData int16, currentPag
 	switch option {
 	case 0:
 		renderer.ClearScreen()
+		data.StatusCode = 1
 		handleMain()
 	case 1:
 		utils.SortPriceDsc(nftList, nData)
@@ -149,6 +152,7 @@ func marketOptionMux3(option int8, nftList *data.TabNFT, nData int16, currentPag
 	switch option {
 	case 0:
 		renderer.ClearScreen()
+		data.StatusCode = 1
 		handleMain()
 	case 1:
 		var code int8

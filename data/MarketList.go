@@ -16,7 +16,7 @@ const NMAX = 1024
 type TabNFT [NMAX]Nft
 
 /*
-This variable tells TabNFT sort status
+This variable tells TabNFT passed data sort status
 - 0: Unsorted.
 - 1: Sorted by ID asc.
 - 2: Sorted by ID dsc.
