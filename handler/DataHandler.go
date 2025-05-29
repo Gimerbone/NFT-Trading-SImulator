@@ -3,7 +3,6 @@ package handler
 import (
 	"app/data"
 	"app/hmap"
-	"app/renderer"
 	"app/utils"
 	"fmt"
 	"math/rand"
@@ -14,7 +13,7 @@ var originalList data.TabNFT
 var nOriginalData int16
 
 var boughtNFTlist [data.NMAX]data.Nft
-var nPortfolio int
+var nPortfolio int16
 
 var rng = rand.New(rand.NewSource(time.Now().UnixNano()))
 
@@ -51,12 +50,6 @@ func uniqueNameGenerator(nameList *hmap.HashMap) string {
 		hmap.AddKey(nameList, name)
 		return name
 	}
-}
-
-func refreshMarket() {
-	renderer.ClearScreen()
-	randomizePrice()
-	handleMarket(originalList, nOriginalData, 1, 1)
 }
 
 func randomizePrice() {

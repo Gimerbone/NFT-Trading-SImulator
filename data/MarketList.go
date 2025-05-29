@@ -173,7 +173,7 @@ var Creators = [100]string{
 	"NaughtyDog", "Bethesda",
 	"SuperRare", "NiftyGate",
 	"SkyMavis", "DapperLabs",
-	"AnimocaBrands", "AxieStudios",
+	"AnimBrands", "AxieStudios",
 	"MagicEden", "SolSea",
 	"Enjin", "CryptoKitties",
 	"Decentraland", "TheSandbox",
