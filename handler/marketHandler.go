@@ -40,11 +40,14 @@ func marketOptionMux1(option int8, nftList *data.TabNFT, nData int16, currentPag
 	switch option {
 	case 0:
 		renderer.ClearScreen()
+		randomizePrice()
 		data.StatusCode = 1
 		handleMain()
 	case 1:
 		data.StatusCode = 1
-		refreshMarket()
+		renderer.ClearScreen()
+		randomizePrice()
+		handleMarket(originalList, nOriginalData, 1, 1)
 	case 2:
 		if currentPage == maxPage {
 			renderer.ClearScreen()
@@ -96,6 +99,7 @@ func marketOptionMux2(option int8, nftList *data.TabNFT, nData int16, currentPag
 	switch option {
 	case 0:
 		renderer.ClearScreen()
+		randomizePrice()
 		data.StatusCode = 1
 		handleMain()
 	case 1:
@@ -124,13 +128,13 @@ func marketOptionMux2(option int8, nftList *data.TabNFT, nData int16, currentPag
 		renderer.ClearScreen()
 		handleMarket(*nftList, nData, currentPage, 2)
 	case 6:
-		code := HandleIDSearch(2)
+		code := HandleMIDSearch(2)
 		if code == 1 {
 			renderer.ClearScreen()
 			handleMarket(*nftList, nData, currentPage, 2)
 		}
 	case 7:
-		code := handleNameSearch(2)
+		code := handleMNameSearch(2)
 		if code == 1 {
 			renderer.ClearScreen()
 			handleMarket(*nftList, nData, currentPage, 2)
@@ -152,6 +156,7 @@ func marketOptionMux3(option int8, nftList *data.TabNFT, nData int16, currentPag
 	switch option {
 	case 0:
 		renderer.ClearScreen()
+		randomizePrice()
 		data.StatusCode = 1
 		handleMain()
 	case 1:
@@ -164,35 +169,35 @@ func marketOptionMux3(option int8, nftList *data.TabNFT, nData int16, currentPag
 		handleMarket(originalList, nOriginalData, currentPage, 3)
 	case 2:
 		var code int8
-		code = handleFilterBlockchain()
+		code = handleMFilterBlockchain()
 		if code == 1 {
 			renderer.ClearScreen()
 			handleMarket(*nftList, nData, currentPage, 3)
 		}
 	case 3:
 		var code int8
-		code = handleFilterCreator()
+		code = handleMFilterCreator()
 		if code == 1 {
 			renderer.ClearScreen()
 			handleMarket(*nftList, nData, currentPage, 3)
 		}
 	case 4:
 		var code int8
-		code = handleFilterYear()
+		code = handleMFilterYear()
 		if code == 1 {
 			renderer.ClearScreen()
 			handleMarket(*nftList, nData, currentPage, 3)
 		}
 	case 5:
 		var code int8
-		code = handleFilterOwner(false)
+		code = handleMFilterOwner(false)
 		if code == 1 {
 			renderer.ClearScreen()
 			handleMarket(*nftList, nData, currentPage, 3)
 		}
 	case 6:
 		var code int8
-		code = handleFilterOwner(true)
+		code = handleMFilterOwner(true)
 		if code == 1 {
 			renderer.ClearScreen()
 			handleMarket(*nftList, nData, currentPage, 3)

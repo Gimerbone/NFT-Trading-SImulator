@@ -63,3 +63,17 @@ func RenderMarketMenu3(option *int8) {
 	fmt.Print("Choose Option: ")
 	fmt.Scanf("%d\n", option)
 }
+
+func RenderPortfolioMenu3(option *int8) {
+	fmt.Printf("\n%s\n%s\n%s\n%s\n%s\n%s\n",
+		"1. Sell NFT",
+		"2. Filter by Blockchain Type",
+		"3. Filter by Creator Name",
+		"4. Filter by Release Year",
+		"9. Previous Option",
+		"0. Back",
+	)
+
+	fmt.Print("Choose Option: ")
+	fmt.Scanf("%d\n", option)
+}

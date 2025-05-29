@@ -32,6 +32,10 @@ func mainMux(option int8) {
 	case 1:
 		renderer.ClearScreen()
 		handleMarket(originalList, nOriginalData, 1, 1)
+	case 2:
+		renderer.ClearScreen()
+		handlePortfolio(boughtNFTlist, nPortfolio, 1, 1)
+
 	default:
 		renderer.ClearScreen()
 		renderer.RenderOptionNotExist()
