@@ -29,9 +29,9 @@ func MainMenu() {
 	case 1:
 		renderer.ClearScreen()
 		Market(storage.MarketList, storage.NMarketData, 1, 1)
-	// case 2:
-	// 	renderer.ClearScreen()
-	// 	handlePortfolio(boughtNFTlist, nPortfolio, 1, 1)
+	case 2:
+		renderer.ClearScreen()
+		Portfolio(storage.PortList, storage.NPortData, 1, 1)
 	default:
 		renderer.ClearScreen()
 		fmt.Println("Option does not exist.")
