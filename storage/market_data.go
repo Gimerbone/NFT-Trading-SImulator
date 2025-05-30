@@ -1,34 +1,12 @@
-package data
+package storage
 
-type Nft struct {
-	ID         uint16
-	Name       string
-	Creator    string
-	Owner      string
-	Blockchain string
-	PriceETH   float32
-	CreatedAt  string
-	Royalty    float32
-}
-
-const NMAX = 1024
-
-type TabNFT [NMAX]Nft
-
-/*
-This variable tells TabNFT passed data sort status
-- 0: Unsorted.
-- 1: Sorted by ID asc.
-- 2: Sorted by ID dsc.
-- 3: Sorted by Price asc.
-- 4: Sorted by Price dsc.
-- 5: Sorted by Date asc.
-- 6. Sorted by Date dsc.
-- 7. Sorted by Royalty asc.
-- 8. Sorted by Royalty dsc.
-Default is one
-*/
-var StatusCode int8 = 1
+import (
+	"app/model"
+	"app/model/hmap"
+	"app/utils"
+	"fmt"
+	"time"
+)
 
 var Blockchains = [10]string{
 	"Ethereum", "Polygon",
@@ -284,4 +262,42 @@ var Owners = [200]string{
 	"Grant T", "Eloise W",
 	"Finn D", "Rebecca O",
 	"Alan B", "Lana S",
+}
+
+var MarketList model.TabNFT
+var NMarketData int16
+
+func InitiateMarketList() {
+	// Preparing nftList array with 999 entries
+	// Should only be called from market handler once
+	var (
+		nameList hmap.HashMap
+		i        uint16
+	)
+
+	for i = 0; i < model.NMAX; i++ {
+		randomDate := time.Now().AddDate(0, 0, -1*utils.Rng.Intn(1000))
+		MarketList[i].ID = i + 1
+		MarketList[i].Name = generateNFTNames(&nameList)
+		MarketList[i].Creator = Creators[utils.Rng.Intn(len(Creators))]
+		MarketList[i].Owner = Owners[utils.Rng.Intn(len(Owners))]
+		MarketList[i].Blockchain = Blockchains[utils.Rng.Intn(len(Blockchains))]
+		MarketList[i].PriceETH = utils.TruncateFloat(utils.Rng.Float32()*10 + 0.1)
+		MarketList[i].CreatedAt = randomDate.Format("02-01-2006")
+		MarketList[i].Royalty = utils.TruncateFloat(utils.Rng.Float32() * 0.15)
+	}
+
+	NMarketData = model.NMAX
+}
+
+func generateNFTNames(nameList *hmap.HashMap) string {
+	var name string
+
+	name = fmt.Sprintf("%s #%d", NftNames[utils.Rng.Intn(len(NftNames))], utils.Rng.Intn(9000)+1000)
+	if hmap.IsKeyPresent(*nameList, name) {
+		return generateNFTNames(nameList)
+	} else {
+		hmap.AddKey(nameList, name)
+		return name
+	}
 }

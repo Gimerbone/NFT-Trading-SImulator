@@ -1,4 +1,4 @@
-package data
+package model
 
 type UserData struct {
 	Name       string

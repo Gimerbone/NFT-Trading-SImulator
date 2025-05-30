@@ -1,11 +1,10 @@
 package hmap
 
+const TABLE_SIZE uint32 = 1024
+
 // This HashMap is specifically developed for market list item.
 // The key and value are like this map[key: string] -> bool.
 // It's optimized for [1, 12] char length string, returns true if found.
-
-const TABLE_SIZE uint32 = 1024
-
 type HashMap [TABLE_SIZE]string
 
 func hash(key string) uint32 {

@@ -1,14 +1,14 @@
 package utils
 
 import (
-	"app/data"
+	"app/model"
 	"time"
 )
 
-func SortIDAsc(arr *data.TabNFT, n int16) {
+func SortIDAsc(arr *model.TabNFT, n int16) {
 	var (
 		i, j int16
-		key  data.Nft
+		key  model.Nft
 	)
 
 	for i = 1; i < n; i++ {
@@ -24,10 +24,10 @@ func SortIDAsc(arr *data.TabNFT, n int16) {
 	}
 }
 
-func SortIDDsc(arr *data.TabNFT, n int16) {
+func SortIDDsc(arr *model.TabNFT, n int16) {
 	var (
 		i, j int16
-		key  data.Nft
+		key  model.Nft
 	)
 
 	for i = 1; i < n; i++ {
@@ -43,10 +43,10 @@ func SortIDDsc(arr *data.TabNFT, n int16) {
 	}
 }
 
-func SortPriceAsc(arr *data.TabNFT, n int16) {
+func SortPriceAsc(arr *model.TabNFT, n int16) {
 	var (
 		i, j int16
-		key  data.Nft
+		key  model.Nft
 	)
 
 	for i = 1; i < n; i++ {
@@ -62,10 +62,10 @@ func SortPriceAsc(arr *data.TabNFT, n int16) {
 	}
 }
 
-func SortPriceDsc(arr *data.TabNFT, n int16) {
+func SortPriceDsc(arr *model.TabNFT, n int16) {
 	var (
 		i, j int16
-		key  data.Nft
+		key  model.Nft
 	)
 
 	for i = 1; i < n; i++ {
@@ -81,10 +81,10 @@ func SortPriceDsc(arr *data.TabNFT, n int16) {
 	}
 }
 
-func SortDateAsc(arr *data.TabNFT, n int16) {
+func SortDateAsc(arr *model.TabNFT, n int16) {
 	var (
 		i, j               int16
-		key                data.Nft
+		key                model.Nft
 		layout             string
 		timeKey, timeIndex time.Time
 	)
@@ -107,10 +107,10 @@ func SortDateAsc(arr *data.TabNFT, n int16) {
 	}
 }
 
-func SortDateDsc(arr *data.TabNFT, n int16) {
+func SortDateDsc(arr *model.TabNFT, n int16) {
 	var (
 		i, j               int16
-		key                data.Nft
+		key                model.Nft
 		layout             string
 		timeKey, timeIndex time.Time
 	)
@@ -133,10 +133,10 @@ func SortDateDsc(arr *data.TabNFT, n int16) {
 	}
 }
 
-func SortRoyaltyAsc(arr *data.TabNFT, n int16) {
+func SortRoyaltyAsc(arr *model.TabNFT, n int16) {
 	var (
 		i, j int16
-		key  data.Nft
+		key  model.Nft
 	)
 
 	for i = 1; i < n; i++ {
@@ -152,10 +152,10 @@ func SortRoyaltyAsc(arr *data.TabNFT, n int16) {
 	}
 }
 
-func SortRoyaltyDsc(arr *data.TabNFT, n int16) {
+func SortRoyaltyDsc(arr *model.TabNFT, n int16) {
 	var (
 		i, j int16
-		key  data.Nft
+		key  model.Nft
 	)
 
 	for i = 1; i < n; i++ {

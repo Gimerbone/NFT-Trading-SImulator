@@ -1,11 +1,11 @@
 package utils
 
 import (
-	"app/data"
+	"app/model"
 )
 
-func SearchMarketID(arr data.TabNFT, nData int16, target uint16) int16 {
-	switch data.StatusCode {
+func SearchID(arr model.TabNFT, nData int16, target uint16) int16 {
+	switch model.MarketSortCode {
 	case 1:
 		return BSearchAscID(arr, nData, uint16(target))
 	case 2:
@@ -15,7 +15,7 @@ func SearchMarketID(arr data.TabNFT, nData int16, target uint16) int16 {
 	}
 }
 
-func BSearchAscID(arr data.TabNFT, nData int16, targetID uint16) int16 {
+func BSearchAscID(arr model.TabNFT, nData int16, targetID uint16) int16 {
 	var (
 		low, high, mid, idx int16
 	)
@@ -38,7 +38,7 @@ func BSearchAscID(arr data.TabNFT, nData int16, targetID uint16) int16 {
 	return idx
 }
 
-func BSearchDscID(arr data.TabNFT, nData int16, targetID uint16) int16 {
+func BSearchDscID(arr model.TabNFT, nData int16, targetID uint16) int16 {
 	var (
 		low, high, mid, idx int16
 	)
@@ -61,7 +61,7 @@ func BSearchDscID(arr data.TabNFT, nData int16, targetID uint16) int16 {
 	return idx
 }
 
-func LSearchID(arr data.TabNFT, nData int16, targetID uint16) int16 {
+func LSearchID(arr model.TabNFT, nData int16, targetID uint16) int16 {
 	var i int16 = 0
 	for i < nData && targetID != arr[i].ID {
 		i++
@@ -74,7 +74,7 @@ func LSearchID(arr data.TabNFT, nData int16, targetID uint16) int16 {
 	}
 }
 
-func LSearchName(arr data.TabNFT, nData int16, targetName string) int16 {
+func LSearchName(arr model.TabNFT, nData int16, targetName string) int16 {
 	var i int16 = 0
 
 	for i < nData && targetName != arr[i].Name {

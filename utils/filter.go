@@ -1,11 +1,11 @@
 package utils
 
 import (
-	"app/data"
+	"app/model"
 	"time"
 )
 
-func FilterByBlockchain(bcName string, arr data.TabNFT, nData int16, newArr *data.TabNFT, newN *int16) {
+func FilterByBlockchain(bcName string, arr model.TabNFT, nData int16, newArr *model.TabNFT, newN *int16) {
 	var i int16
 	*newN = 0
 	for i = 0; i < nData; i++ {
@@ -16,7 +16,7 @@ func FilterByBlockchain(bcName string, arr data.TabNFT, nData int16, newArr *dat
 	}
 }
 
-func FilterByCreator(cName string, arr data.TabNFT, nData int16, newArr *data.TabNFT, newN *int16) {
+func FilterByCreator(cName string, arr model.TabNFT, nData int16, newArr *model.TabNFT, newN *int16) {
 	var i int16
 	*newN = 0
 	for i = 0; i < nData; i++ {
@@ -27,7 +27,7 @@ func FilterByCreator(cName string, arr data.TabNFT, nData int16, newArr *data.Ta
 	}
 }
 
-func FilterByYear(year string, arr data.TabNFT, nData int16, newArr *data.TabNFT, newN *int16) {
+func FilterByYear(year string, arr model.TabNFT, nData int16, newArr *model.TabNFT, newN *int16) {
 	var (
 		i    int16
 		date time.Time
@@ -42,7 +42,7 @@ func FilterByYear(year string, arr data.TabNFT, nData int16, newArr *data.TabNFT
 	}
 }
 
-func FilterByOwner(oName string, arr data.TabNFT, nData int16, newArr *data.TabNFT, newN *int16) {
+func FilterByOwner(oName string, arr model.TabNFT, nData int16, newArr *model.TabNFT, newN *int16) {
 	var i int16
 	*newN = 0
 	for i = 0; i < nData; i++ {
