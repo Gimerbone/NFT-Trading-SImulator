@@ -18,6 +18,7 @@ func MainMenu() {
 	renderer.RenderLogo()
 	fmt.Println("1. Browse Market")
 	fmt.Println("2. View Your portfolio")
+	fmt.Println("3. Open Sell Order")
 	fmt.Println("0. Exit App")
 	fmt.Print("Choose Option: ")
 	fmt.Scanf("%d\n", &option)
@@ -31,7 +32,11 @@ func MainMenu() {
 		Market(storage.MarketList, storage.NMarketData, 1, 1)
 	case 2:
 		renderer.ClearScreen()
+		calculateTotalValue()
 		Portfolio(storage.PortList, storage.NPortData, 1, 1)
+	case 3:
+		renderer.ClearScreen()
+		SellOrder(storage.SellOrderList, storage.NSellOrderList, 1)
 	default:
 		renderer.ClearScreen()
 		fmt.Println("Option does not exist.")
@@ -259,7 +264,7 @@ func MarketMux3(nftList *model.TabNFT, nData int16, currentPage int16, maxPage i
 		utils.InputID(&id)
 
 		renderer.ClearScreen()
-		if id != -1 && purchaseNFT(uint16(id)) == 1 {
+		if id != -1 && purchaseNFT(uint16(id)) == -1 {
 			fmt.Println("Balance not enough.")
 		}
 		Market(storage.MarketList, storage.NMarketData, currentPage, 3)
@@ -531,11 +536,12 @@ func PortMux2(nftList *model.TabNFT, nData int16, currentPage int16, maxPage int
 func PortMux3(nftList *model.TabNFT, nData int16, currentPage int16, maxPage int16) {
 	var option int8
 
-	fmt.Printf("\n%s\n%s\n%s\n%s\n%s\n%s\n",
+	fmt.Printf("\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
 		"1. Sort by bought time",
 		"1. Filter by Blockchain Type",
 		"2. Filter by Creator Name",
 		"3. Filter by Release Year",
+		"4. Enlist item to Sell Order",
 		"9. Previous Option",
 		"0. Back",
 	)
@@ -594,6 +600,10 @@ func PortMux3(nftList *model.TabNFT, nData int16, currentPage int16, maxPage int
 		}
 		utils.FilterByYear(year, storage.PortList, storage.NPortData, &filteredList, &nFilteredData)
 		Portfolio(filteredList, nFilteredData, 1, 3)
+	case 5:
+		enlistNFT()
+		renderer.ClearScreen()
+		Portfolio(storage.PortList, storage.NPortData, 1, 3)
 	case 9:
 		renderer.ClearScreen()
 		Portfolio(*nftList, nData, currentPage, 2)
@@ -601,5 +611,66 @@ func PortMux3(nftList *model.TabNFT, nData int16, currentPage int16, maxPage int
 		renderer.ClearScreen()
 		fmt.Println("Option does not exist.")
 		Portfolio(*nftList, nData, currentPage, 3)
+	}
+}
+
+func sOMux(nftList *model.TabNFT, nData int16, currentPage int16, maxPage int16) {
+	var option int8
+
+	fmt.Printf("\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
+		"1. Refresh Market",
+		"2. Next Page",
+		"3. Previous Page",
+		"4. First Page",
+		"5. Last Page",
+		"6. Cancel Selling",
+		"0. Back",
+	)
+
+	fmt.Print("Choose Option: ")
+	fmt.Scanf("%d\n", &option)
+
+	switch option {
+	case 0:
+		renderer.ClearScreen()
+		utils.RandomizePrice(&storage.SellOrderList, storage.NSellOrderList)
+		MainMenu()
+	case 1:
+		renderer.ClearScreen()
+		utils.RandomizePrice(&storage.SellOrderList, storage.NSellOrderList)
+
+		handleSelling()
+
+		SellOrder(storage.SellOrderList, storage.NSellOrderList, currentPage)
+	case 2:
+		if currentPage == maxPage {
+			renderer.ClearScreen()
+			SellOrder(*nftList, nData, maxPage)
+		} else {
+			renderer.ClearScreen()
+			SellOrder(*nftList, nData, currentPage+1)
+		}
+	case 3:
+		if currentPage == 1 {
+			renderer.ClearScreen()
+			SellOrder(*nftList, nData, 1)
+		} else {
+			renderer.ClearScreen()
+			SellOrder(*nftList, nData, currentPage-1)
+		}
+	case 4:
+		renderer.ClearScreen()
+		SellOrder(*nftList, nData, 1)
+	case 5:
+		renderer.ClearScreen()
+		SellOrder(*nftList, nData, maxPage)
+	case 6:
+		CancelSellOrder()
+		renderer.ClearScreen()
+		SellOrder(*nftList, nData, currentPage)
+	default:
+		renderer.ClearScreen()
+		fmt.Println("Option does not exist.")
+		SellOrder(*nftList, nData, currentPage)
 	}
 }

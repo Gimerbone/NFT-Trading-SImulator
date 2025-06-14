@@ -11,7 +11,7 @@ func Market(nftList model.TabNFT, nData int16, pageNumber int16, menuNumber int8
 
 	entryPerPage = 15
 	maxPage = utils.IntDivCeil(nData, entryPerPage)
-	renderer.RenderTable(nftList, nData, pageNumber, entryPerPage, maxPage)
+	renderer.RenderMarketTable(nftList, nData, pageNumber, entryPerPage, maxPage)
 
 	switch menuNumber {
 	case 1:
